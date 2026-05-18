@@ -1,21 +1,28 @@
 ﻿<!doctype html>
 <html lang="fr">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Factura — Legal Center</title>
-  <meta name="description" content="Factura Legal Center: privacy policy, terms of use, support and open-source licenses.">
+  <meta name="description" content="Factura Legal Center: privacy policy, terms of use, support and open-source licenses." />
   <style>
     :root {
-      --bg: #f6f7fb;
-      --card: rgba(255,255,255,.86);
-      --text: #111827;
-      --muted: #5f6675;
-      --line: rgba(17,24,39,.10);
+      --bg: #f5f7fb;
+      --text: #0f172a;
+      --muted: #64748b;
+      --soft: #eef4ff;
       --blue: #2563eb;
-      --blue2: #3b82f6;
-      --shadow: 0 24px 80px rgba(15, 23, 42, .10);
-      --radius: 28px;
+      --blue2: #60a5fa;
+      --cyan: #38bdf8;
+      --indigo: #6366f1;
+      --card: rgba(255, 255, 255, .78);
+      --card-strong: rgba(255, 255, 255, .94);
+      --line: rgba(15, 23, 42, .10);
+      --shadow: 0 30px 90px rgba(15, 23, 42, .12);
+      --shadow-soft: 0 18px 50px rgba(37, 99, 235, .14);
+      --radius-xl: 34px;
+      --radius-lg: 26px;
+      --radius-md: 18px;
     }
 
     * { box-sizing: border-box; }
@@ -24,378 +31,988 @@
 
     body {
       margin: 0;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
       color: var(--text);
       background:
-        radial-gradient(circle at top left, rgba(59,130,246,.16), transparent 34%),
-        radial-gradient(circle at top right, rgba(147,197,253,.22), transparent 30%),
-        var(--bg);
-      line-height: 1.65;
+        radial-gradient(circle at 10% 0%, rgba(96, 165, 250, .30), transparent 32%),
+        radial-gradient(circle at 90% 4%, rgba(99, 102, 241, .20), transparent 28%),
+        radial-gradient(circle at 50% 110%, rgba(56, 189, 248, .18), transparent 34%),
+        linear-gradient(180deg, #ffffff 0%, var(--bg) 42%, #eef3fb 100%);
+      line-height: 1.68;
+      overflow-x: hidden;
     }
 
-    header {
-      padding: 72px 22px 36px;
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background-image:
+        linear-gradient(rgba(15, 23, 42, .025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(15, 23, 42, .025) 1px, transparent 1px);
+      background-size: 44px 44px;
+      mask-image: linear-gradient(to bottom, rgba(0,0,0,.6), transparent 70%);
+      z-index: -1;
+    }
+
+    a { color: var(--blue); font-weight: 700; }
+
+    .page {
+      width: min(1120px, calc(100% - 28px));
+      margin: 0 auto;
+    }
+
+    .topbar {
+      position: sticky;
+      top: 14px;
+      z-index: 20;
+      margin: 14px auto 0;
+      width: min(1120px, calc(100% - 28px));
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      padding: 10px;
+      border: 1px solid rgba(255,255,255,.72);
+      border-radius: 999px;
+      background: rgba(255,255,255,.66);
+      box-shadow: 0 14px 40px rgba(15, 23, 42, .08);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      min-width: 0;
+      padding-left: 8px;
+    }
+
+    .app-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 13px;
+      background:
+        radial-gradient(circle at 30% 18%, rgba(255,255,255,.85), transparent 24%),
+        linear-gradient(145deg, #60a5fa, #2563eb 55%, #1d4ed8);
+      box-shadow: 0 12px 28px rgba(37, 99, 235, .32);
+      position: relative;
+      flex: 0 0 auto;
+    }
+
+    .app-icon::after {
+      content: "";
+      position: absolute;
+      left: 11px;
+      right: 11px;
+      top: 10px;
+      bottom: 10px;
+      border-radius: 5px;
+      background: rgba(255,255,255,.92);
+      box-shadow:
+        0 5px 0 rgba(255,255,255,.55),
+        0 10px 0 rgba(255,255,255,.35);
+    }
+
+    .brand-title {
+      font-weight: 850;
+      letter-spacing: -.035em;
+      line-height: 1.05;
+      white-space: nowrap;
+    }
+
+    .brand-subtitle {
+      color: var(--muted);
+      font-size: 12px;
+      margin-top: 1px;
+      white-space: nowrap;
+    }
+
+    .lang-switch {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, .05);
+      border: 1px solid rgba(15, 23, 42, .06);
+      flex: 0 0 auto;
+    }
+
+    .lang-btn {
+      appearance: none;
+      border: 0;
+      cursor: pointer;
+      padding: 9px 12px;
+      border-radius: 999px;
+      background: transparent;
+      color: var(--muted);
+      font-weight: 800;
+      font-size: 13px;
+      transition: transform .2s ease, background .2s ease, color .2s ease, box-shadow .2s ease;
+    }
+
+    .lang-btn:hover { transform: translateY(-1px); }
+
+    .lang-btn.active {
+      background: white;
+      color: var(--text);
+      box-shadow: 0 10px 24px rgba(15, 23, 42, .10);
+    }
+
+    header.hero {
+      padding: 78px 0 36px;
       text-align: center;
+      position: relative;
     }
 
-    .badge {
+    .hero-badge {
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      padding: 8px 14px;
+      padding: 9px 15px;
       border-radius: 999px;
-      color: var(--blue);
-      background: rgba(37,99,235,.09);
-      font-weight: 700;
+      color: #1d4ed8;
+      background: rgba(37, 99, 235, .10);
+      border: 1px solid rgba(37, 99, 235, .12);
+      font-weight: 850;
       font-size: 13px;
-      letter-spacing: .02em;
+      letter-spacing: .01em;
     }
 
     h1 {
-      margin: 18px auto 10px;
-      max-width: 900px;
-      font-size: clamp(36px, 7vw, 72px);
-      line-height: 1.02;
-      letter-spacing: -.055em;
+      margin: 20px auto 14px;
+      max-width: 950px;
+      font-size: clamp(42px, 8vw, 86px);
+      line-height: .98;
+      letter-spacing: -.07em;
+      font-weight: 900;
+    }
+
+    .gradient-text {
+      background: linear-gradient(120deg, #0f172a 0%, #1d4ed8 52%, #38bdf8 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
     }
 
     .hero-text {
-      max-width: 760px;
+      max-width: 790px;
       margin: 0 auto;
       color: var(--muted);
-      font-size: 18px;
+      font-size: clamp(17px, 2.3vw, 21px);
     }
 
-    nav {
-      max-width: 980px;
-      margin: 28px auto 0;
+    .hero-cards {
+      margin: 34px auto 0;
+      display: grid;
+      grid-template-columns: 1.1fr .9fr;
+      gap: 18px;
+      align-items: stretch;
+    }
+
+    .hero-panel {
+      text-align: left;
+      padding: clamp(22px, 4vw, 34px);
+      border-radius: var(--radius-xl);
+      background: rgba(255,255,255,.78);
+      border: 1px solid rgba(255,255,255,.76);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-panel::before {
+      content: "";
+      position: absolute;
+      inset: -80px -80px auto auto;
+      width: 210px;
+      height: 210px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(96,165,250,.34), transparent 62%);
+    }
+
+    .hero-panel h2 {
+      margin: 0 0 10px;
+      font-size: clamp(25px, 4vw, 38px);
+      line-height: 1.08;
+      letter-spacing: -.045em;
+    }
+
+    .hero-panel p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 16px;
+    }
+
+    .status-card {
+      display: grid;
+      gap: 12px;
+    }
+
+    .status-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 16px;
+      border-radius: 22px;
+      background: rgba(255,255,255,.76);
+      border: 1px solid rgba(15,23,42,.08);
+      box-shadow: 0 12px 32px rgba(15,23,42,.06);
+      text-align: left;
+    }
+
+    .status-dot {
+      width: 38px;
+      height: 38px;
+      display: grid;
+      place-items: center;
+      border-radius: 14px;
+      background: linear-gradient(145deg, rgba(37,99,235,.16), rgba(56,189,248,.14));
+      color: var(--blue);
+      font-weight: 900;
+      flex: 0 0 auto;
+    }
+
+    .status-row strong {
+      display: block;
+      line-height: 1.15;
+    }
+
+    .status-row span {
+      display: block;
+      color: var(--muted);
+      font-size: 13px;
+      margin-top: 2px;
+    }
+
+    nav.anchors {
+      margin: 28px auto 20px;
       display: flex;
       justify-content: center;
       flex-wrap: wrap;
       gap: 10px;
-      padding: 0 20px;
     }
 
-    nav a {
+    nav.anchors a {
       color: var(--text);
       text-decoration: none;
-      padding: 10px 14px;
-      border: 1px solid var(--line);
+      padding: 11px 15px;
+      border: 1px solid rgba(15,23,42,.08);
       border-radius: 999px;
-      background: rgba(255,255,255,.72);
-      font-weight: 650;
+      background: rgba(255,255,255,.68);
+      box-shadow: 0 10px 28px rgba(15,23,42,.05);
+      font-weight: 800;
       font-size: 14px;
+      transition: transform .2s ease, color .2s ease, border-color .2s ease;
     }
 
-    nav a:hover {
-      border-color: rgba(37,99,235,.35);
+    nav.anchors a:hover {
+      transform: translateY(-1px);
       color: var(--blue);
-    }
-
-    main {
-      width: min(1040px, calc(100% - 28px));
-      margin: 0 auto 60px;
+      border-color: rgba(37,99,235,.26);
     }
 
     section {
       margin: 22px 0;
-      padding: clamp(22px, 4vw, 44px);
-      border-radius: var(--radius);
+      padding: clamp(24px, 4vw, 46px);
+      border-radius: var(--radius-xl);
       background: var(--card);
-      border: 1px solid rgba(255,255,255,.68);
+      border: 1px solid rgba(255,255,255,.74);
       box-shadow: var(--shadow);
-      backdrop-filter: blur(18px);
+      backdrop-filter: blur(22px);
+      -webkit-backdrop-filter: blur(22px);
+      overflow: hidden;
+    }
+
+    .section-head {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 18px;
+      margin-bottom: 20px;
+    }
+
+    .section-kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--blue);
+      background: rgba(37,99,235,.09);
+      border: 1px solid rgba(37,99,235,.11);
+      padding: 7px 12px;
+      border-radius: 999px;
+      font-weight: 850;
+      font-size: 12px;
+      margin-bottom: 12px;
     }
 
     h2 {
-      margin: 0 0 14px;
-      font-size: clamp(26px, 4vw, 38px);
-      line-height: 1.1;
-      letter-spacing: -.035em;
+      margin: 0;
+      font-size: clamp(28px, 4.4vw, 44px);
+      line-height: 1.05;
+      letter-spacing: -.055em;
     }
 
     h3 {
-      margin: 28px 0 8px;
-      font-size: 20px;
-      letter-spacing: -.02em;
+      margin: 30px 0 8px;
+      font-size: 21px;
+      letter-spacing: -.03em;
     }
 
     p { margin: 10px 0; }
 
     ul { padding-left: 20px; }
 
-    li { margin: 7px 0; }
+    li { margin: 8px 0; }
 
     .muted { color: var(--muted); }
 
-    .grid {
+    .cards-grid {
       display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
+      grid-template-columns: repeat(3, minmax(0, 1fr));
       gap: 14px;
-      margin-top: 18px;
+      margin: 20px 0;
     }
 
     .mini-card {
       padding: 18px;
-      border: 1px solid var(--line);
-      border-radius: 20px;
+      border: 1px solid rgba(15,23,42,.08);
+      border-radius: 23px;
       background: rgba(255,255,255,.70);
+      box-shadow: 0 14px 32px rgba(15,23,42,.05);
+    }
+
+    .mini-card .icon {
+      width: 38px;
+      height: 38px;
+      border-radius: 14px;
+      display: grid;
+      place-items: center;
+      background: linear-gradient(145deg, rgba(37,99,235,.14), rgba(56,189,248,.12));
+      margin-bottom: 12px;
+      font-weight: 900;
     }
 
     .mini-card strong {
       display: block;
-      margin-bottom: 4px;
+      margin-bottom: 5px;
+      letter-spacing: -.02em;
     }
 
-    a {
-      color: var(--blue);
-      font-weight: 650;
+    .mini-card span {
+      color: var(--muted);
+      font-size: 14px;
     }
 
     .notice {
-      border-left: 4px solid var(--blue);
-      padding: 14px 16px;
-      background: rgba(37,99,235,.08);
-      border-radius: 16px;
+      border: 1px solid rgba(37,99,235,.14);
+      border-left: 5px solid var(--blue);
+      padding: 16px 18px;
+      background: linear-gradient(135deg, rgba(37,99,235,.08), rgba(56,189,248,.07));
+      border-radius: 20px;
+      margin: 20px 0;
+    }
+
+    .legal-list {
+      display: grid;
+      gap: 12px;
       margin: 18px 0;
+    }
+
+    .legal-item {
+      display: flex;
+      gap: 12px;
+      padding: 15px;
+      border-radius: 22px;
+      background: rgba(255,255,255,.64);
+      border: 1px solid rgba(15,23,42,.07);
+    }
+
+    .check {
+      width: 25px;
+      height: 25px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background: var(--blue);
+      color: white;
+      font-size: 14px;
+      font-weight: 900;
+      flex: 0 0 auto;
+      margin-top: 2px;
     }
 
     footer {
       text-align: center;
       color: var(--muted);
-      padding: 20px 20px 52px;
+      padding: 24px 20px 58px;
       font-size: 14px;
     }
 
-    @media (max-width: 720px) {
-      header { padding-top: 46px; }
-      .grid { grid-template-columns: 1fr; }
-      section { border-radius: 22px; }
-      nav { justify-content: flex-start; overflow-x: auto; flex-wrap: nowrap; padding-bottom: 4px; }
-      nav a { white-space: nowrap; }
+    [data-lang="en"] { display: none; }
+
+    body.lang-en [data-lang="fr"] { display: none; }
+    body.lang-en [data-lang="en"] { display: block; }
+    body.lang-en span[data-lang="en"],
+    body.lang-en strong[data-lang="en"],
+    body.lang-en a[data-lang="en"] { display: inline; }
+
+    body.lang-fr [data-lang="fr"] { display: block; }
+    body.lang-fr span[data-lang="fr"],
+    body.lang-fr strong[data-lang="fr"],
+    body.lang-fr a[data-lang="fr"] { display: inline; }
+
+    @media (max-width: 860px) {
+      .hero-cards { grid-template-columns: 1fr; }
+      .cards-grid { grid-template-columns: 1fr; }
+      .section-head { display: block; }
+      header.hero { padding-top: 56px; }
+    }
+
+    @media (max-width: 640px) {
+      .topbar {
+        top: 8px;
+        border-radius: 24px;
+      }
+
+      .brand-subtitle { display: none; }
+
+      .lang-btn {
+        padding: 8px 10px;
+        font-size: 12px;
+      }
+
+      nav.anchors {
+        justify-content: flex-start;
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        padding-bottom: 6px;
+      }
+
+      nav.anchors a { white-space: nowrap; }
+
+      section { border-radius: 26px; }
+
+      .hero-panel,
+      section { padding: 22px; }
     }
   </style>
 </head>
 
-<body>
-  <header>
-    <div class="badge">Factura · Legal Center</div>
-    <h1>Legal, Privacy & Support</h1>
-    <p class="hero-text">
-      Informations légales, confidentialité, conditions d’utilisation, support et licences open-source pour l’application Factura.
-    </p>
+<body class="lang-fr">
+  <div class="topbar">
+    <div class="brand">
+      <div class="app-icon" aria-hidden="true"></div>
+      <div>
+        <div class="brand-title">Factura</div>
+        <div class="brand-subtitle">Legal Center</div>
+      </div>
+    </div>
 
-    <nav>
-      <a href="#privacy">Confidentialité</a>
-      <a href="#terms">Conditions</a>
-      <a href="#support">Support</a>
-      <a href="#licenses">Licences</a>
-      <a href="#contact">Contact</a>
-      <a href="#english">English</a>
-    </nav>
-  </header>
+    <div class="lang-switch" aria-label="Language switch">
+      <button class="lang-btn active" id="btn-fr" onclick="setLang('fr')">🇫🇷 FR</button>
+      <button class="lang-btn" id="btn-en" onclick="setLang('en')">🇬🇧 EN</button>
+    </div>
+  </div>
 
-  <main>
+  <main class="page">
+    <header class="hero">
+      <div class="hero-badge">
+        <span data-lang="fr">Centre légal officiel</span>
+        <span data-lang="en">Official legal center</span>
+      </div>
+
+      <h1>
+        <span data-lang="fr">Tout ce qui compte, <span class="gradient-text">clairement.</span></span>
+        <span data-lang="en">Everything that matters, <span class="gradient-text">clearly.</span></span>
+      </h1>
+
+      <p class="hero-text" data-lang="fr">
+        Confidentialité, conditions d’utilisation, support et licences open-source pour Factura, votre application de facturation locale, simple et professionnelle.
+      </p>
+      <p class="hero-text" data-lang="en">
+        Privacy, terms of use, support and open-source licenses for Factura, your local, simple and professional invoicing app.
+      </p>
+
+      <div class="hero-cards">
+        <div class="hero-panel">
+          <h2 data-lang="fr">Une app pensée pour garder vos données entre vos mains.</h2>
+          <h2 data-lang="en">An app designed to keep your data in your hands.</h2>
+
+          <p data-lang="fr">
+            Factura fonctionne sans compte obligatoire, sans publicité et avec une approche local-first. Vos factures, clients, PDF, préférences et sauvegardes restent principalement sur votre appareil.
+          </p>
+          <p data-lang="en">
+            Factura works without a mandatory account, without advertising and with a local-first approach. Your invoices, clients, PDF files, preferences and backups remain primarily on your device.
+          </p>
+        </div>
+
+        <div class="status-card">
+          <div class="status-row">
+            <div class="status-dot">✓</div>
+            <div>
+              <strong data-lang="fr">Sans compte obligatoire</strong>
+              <strong data-lang="en">No mandatory account</strong>
+              <span data-lang="fr">Utilisation simple et directe.</span>
+              <span data-lang="en">Simple and direct use.</span>
+            </div>
+          </div>
+
+          <div class="status-row">
+            <div class="status-dot">✓</div>
+            <div>
+              <strong data-lang="fr">Sans publicité</strong>
+              <strong data-lang="en">No advertising</strong>
+              <span data-lang="fr">Pas de modèle basé sur les annonces.</span>
+              <span data-lang="en">No ad-based business model.</span>
+            </div>
+          </div>
+
+          <div class="status-row">
+            <div class="status-dot">✓</div>
+            <div>
+              <strong data-lang="fr">Support direct</strong>
+              <strong data-lang="en">Direct support</strong>
+              <span>support@elmariniapp.com</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <nav class="anchors">
+        <a href="#privacy" data-lang="fr">Confidentialité</a>
+        <a href="#privacy" data-lang="en">Privacy</a>
+
+        <a href="#terms" data-lang="fr">Conditions</a>
+        <a href="#terms" data-lang="en">Terms</a>
+
+        <a href="#support">Support</a>
+
+        <a href="#licenses" data-lang="fr">Licences</a>
+        <a href="#licenses" data-lang="en">Licenses</a>
+
+        <a href="#contact">Contact</a>
+      </nav>
+    </header>
+
     <section id="privacy">
-      <h2>Politique de confidentialité</h2>
-      <p class="muted">Dernière mise à jour : 2026</p>
+      <div class="section-head">
+        <div>
+          <div class="section-kicker">
+            <span data-lang="fr">Confidentialité</span>
+            <span data-lang="en">Privacy</span>
+          </div>
+          <h2 data-lang="fr">Politique de confidentialité</h2>
+          <h2 data-lang="en">Privacy Policy</h2>
+          <p class="muted" data-lang="fr">Dernière mise à jour : 2026</p>
+          <p class="muted" data-lang="en">Last updated: 2026</p>
+        </div>
+      </div>
 
-      <p>
-        Factura est une application de création et de gestion de factures conçue pour fonctionner simplement et localement.
-        Cette politique explique comment vos données sont traitées lorsque vous utilisez l’application.
-      </p>
+      <div data-lang="fr">
+        <p>
+          Factura est une application de création et de gestion de factures conçue pour fonctionner de manière simple, locale et professionnelle. Cette politique explique comment vos données sont traitées lorsque vous utilisez l’application.
+        </p>
 
-      <h3>Données personnelles</h3>
-      <p>
-        Factura ne nécessite pas de compte utilisateur. L’application ne demande pas d’inscription, ne propose pas de réseau social
-        et ne vend pas vos données personnelles.
-      </p>
+        <div class="cards-grid">
+          <div class="mini-card">
+            <div class="icon">🔒</div>
+            <strong>Données locales</strong>
+            <span>Vos factures, clients, profils, PDF, signatures et préférences sont stockés localement sur votre appareil.</span>
+          </div>
+          <div class="mini-card">
+            <div class="icon">🚫</div>
+            <strong>Pas de publicité</strong>
+            <span>Factura n’intègre pas de publicité et n’utilise pas de suivi publicitaire.</span>
+          </div>
+          <div class="mini-card">
+            <div class="icon">☁️</div>
+            <strong>Pas de cloud imposé</strong>
+            <span>Factura ne synchronise pas automatiquement vos données vers un cloud propriétaire.</span>
+          </div>
+        </div>
 
-      <h3>Données stockées localement</h3>
-      <p>
-        Les informations que vous ajoutez dans Factura, comme les factures, clients, profil entreprise, logo, signature,
-        cachet, préférences et fichiers générés, sont stockées localement sur votre appareil.
-      </p>
+        <h3>Données personnelles</h3>
+        <p>
+          Factura ne nécessite pas de compte utilisateur pour fonctionner. L’application ne demande pas d’inscription, ne propose pas de réseau social et ne vend pas vos données personnelles.
+        </p>
 
-      <h3>Documents et factures</h3>
-      <p>
-        Les factures, PDF, sauvegardes ZIP et exports générés par l’application restent sous votre contrôle.
-        Lorsque vous partagez ou exportez un document, l’action est effectuée via les mécanismes de partage ou de stockage de votre appareil.
-      </p>
+        <h3>Données que vous créez dans l’application</h3>
+        <p>
+          Les informations que vous ajoutez dans Factura peuvent inclure des factures, clients, coordonnées professionnelles, logo, signature, cachet, préférences, exports PDF, sauvegardes ZIP et autres fichiers générés par l’application. Ces données sont destinées à rester sous votre contrôle.
+        </p>
 
-      <h3>Publicité et suivi</h3>
-      <p>
-        Factura n’intègre pas de publicité et n’utilise pas de suivi publicitaire.
-      </p>
+        <h3>Stockage local</h3>
+        <p>
+          Les données de Factura sont principalement stockées localement sur votre appareil. Cela signifie que vous gardez le contrôle de vos documents, mais aussi que vous êtes responsable de vos sauvegardes si vous changez d’appareil, réinitialisez votre téléphone ou désinstallez l’application.
+        </p>
 
-      <h3>Achats intégrés</h3>
-      <p>
-        Factura peut proposer une version Pro. Les achats, lorsqu’ils sont disponibles, sont gérés par les plateformes officielles
-        comme Google Play ou l’App Store. Ces plateformes peuvent traiter certaines données nécessaires au paiement, selon leurs propres politiques.
-      </p>
+        <h3>Exports, partage et sauvegardes</h3>
+        <p>
+          Lorsque vous exportez, partagez ou sauvegardez une facture ou un fichier ZIP, l’action est effectuée via les fonctionnalités de votre appareil ou les applications que vous choisissez. Une fois partagé en dehors de Factura, le fichier dépend du service, de l’application ou de l’emplacement que vous avez sélectionné.
+        </p>
 
-      <h3>Cloud et sauvegarde</h3>
-      <p>
-        Factura ne synchronise pas automatiquement vos données vers un cloud propriétaire. Si vous utilisez une sauvegarde ZIP ou un export,
-        vous êtes responsable du lieu où vous stockez ou partagez ce fichier.
-      </p>
+        <h3>Achats intégrés</h3>
+        <p>
+          Factura peut proposer une version Pro. Les achats intégrés, lorsqu’ils sont disponibles, sont gérés par les plateformes officielles comme Google Play ou l’App Store. Ces plateformes peuvent traiter certaines données nécessaires au paiement selon leurs propres politiques.
+        </p>
 
-      <h3>Suppression des données</h3>
-      <p>
-        Vous pouvez supprimer vos données directement depuis l’application lorsque les options correspondantes existent.
-        La désinstallation de l’application peut supprimer les données locales selon le comportement du système d’exploitation.
-      </p>
+        <h3>Suppression des données</h3>
+        <p>
+          Vous pouvez supprimer certaines données directement depuis l’application lorsque les options correspondantes existent. La désinstallation de l’application peut supprimer les données locales selon le comportement du système d’exploitation.
+        </p>
 
-      <h3>Contact confidentialité</h3>
-      <p>
-        Pour toute question liée à la confidentialité, vous pouvez nous contacter à :
-        <a href="mailto:support@elmariniapp.com">support@elmariniapp.com</a>
-      </p>
+        <h3>Contact confidentialité</h3>
+        <p>
+          Pour toute question liée à la confidentialité, contactez-nous à :
+          <a href="mailto:support@elmariniapp.com">support@elmariniapp.com</a>
+        </p>
+      </div>
+
+      <div data-lang="en">
+        <p>
+          Factura is an invoice creation and management app designed to work in a simple, local and professional way. This policy explains how your data is handled when you use the app.
+        </p>
+
+        <div class="cards-grid">
+          <div class="mini-card">
+            <div class="icon">🔒</div>
+            <strong>Local data</strong>
+            <span>Your invoices, clients, profiles, PDF files, signatures and preferences are stored locally on your device.</span>
+          </div>
+          <div class="mini-card">
+            <div class="icon">🚫</div>
+            <strong>No ads</strong>
+            <span>Factura does not include advertising and does not use advertising tracking.</span>
+          </div>
+          <div class="mini-card">
+            <div class="icon">☁️</div>
+            <strong>No forced cloud</strong>
+            <span>Factura does not automatically synchronize your data to a proprietary cloud service.</span>
+          </div>
+        </div>
+
+        <h3>Personal data</h3>
+        <p>
+          Factura does not require a user account to work. The app does not require registration, does not provide a social network and does not sell your personal data.
+        </p>
+
+        <h3>Data you create in the app</h3>
+        <p>
+          Information you add to Factura may include invoices, clients, business details, logo, signature, stamp, preferences, PDF exports, ZIP backups and other files generated by the app. This data is intended to remain under your control.
+        </p>
+
+        <h3>Local storage</h3>
+        <p>
+          Factura data is primarily stored locally on your device. This means you keep control over your documents, but you are also responsible for your backups if you change devices, reset your phone or uninstall the app.
+        </p>
+
+        <h3>Exports, sharing and backups</h3>
+        <p>
+          When you export, share or back up an invoice or ZIP file, the action is performed through your device features or the apps you choose. Once shared outside Factura, the file depends on the service, app or location you selected.
+        </p>
+
+        <h3>In-app purchases</h3>
+        <p>
+          Factura may offer a Pro version. In-app purchases, when available, are handled by official platforms such as Google Play or the App Store. These platforms may process payment-related data according to their own policies.
+        </p>
+
+        <h3>Data deletion</h3>
+        <p>
+          You can delete certain data directly from the app when the relevant options are available. Uninstalling the app may delete local data depending on the operating system behavior.
+        </p>
+
+        <h3>Privacy contact</h3>
+        <p>
+          For privacy-related questions, contact us at:
+          <a href="mailto:support@elmariniapp.com">support@elmariniapp.com</a>
+        </p>
+      </div>
     </section>
 
     <section id="terms">
-      <h2>Conditions d’utilisation</h2>
-      <p class="muted">Dernière mise à jour : 2026</p>
-
-      <p>
-        En utilisant Factura, vous acceptez les présentes conditions d’utilisation.
-      </p>
-
-      <h3>Objet de l’application</h3>
-      <p>
-        Factura permet de créer, organiser, personnaliser, exporter et partager des factures et documents associés.
-      </p>
-
-      <h3>Responsabilité de l’utilisateur</h3>
-      <p>
-        Vous êtes responsable du contenu saisi dans l’application, de l’exactitude de vos factures, de vos informations légales,
-        fiscales, commerciales et comptables, ainsi que de l’utilisation des documents générés.
-      </p>
-
-      <div class="notice">
-        Factura est un outil de productivité. L’application ne remplace pas les conseils d’un expert-comptable, d’un avocat,
-        d’un conseiller fiscal ou d’une administration compétente.
+      <div class="section-kicker">
+        <span data-lang="fr">Conditions</span>
+        <span data-lang="en">Terms</span>
       </div>
 
-      <h3>Conformité légale et fiscale</h3>
-      <p>
-        Les obligations de facturation peuvent varier selon votre pays, votre statut, votre activité et vos clients.
-        Il vous appartient de vérifier que vos factures respectent les règles applicables à votre situation.
-      </p>
+      <h2 data-lang="fr">Conditions d’utilisation</h2>
+      <h2 data-lang="en">Terms of Use</h2>
 
-      <h3>PDF et exports</h3>
-      <p>
-        Les PDF, exports CSV, JSON, ZIP ou autres fichiers générés par Factura sont fournis comme outils de gestion.
-        Vous devez vérifier leur contenu avant envoi, archivage ou utilisation officielle.
-      </p>
+      <p class="muted" data-lang="fr">Dernière mise à jour : 2026</p>
+      <p class="muted" data-lang="en">Last updated: 2026</p>
 
-      <h3>Version Pro</h3>
-      <p>
-        Certaines fonctionnalités peuvent être réservées à Factura Pro, comme les factures illimitées, templates premium,
-        exports avancés, sauvegarde/restauration ZIP ou suppression du filigrane.
-      </p>
+      <div data-lang="fr">
+        <p>
+          En utilisant Factura, vous acceptez les présentes conditions d’utilisation. Factura est un outil de productivité destiné à faciliter la création, l’organisation, la personnalisation, l’export et le partage de factures.
+        </p>
 
-      <h3>Disponibilité</h3>
-      <p>
-        Nous faisons notre possible pour maintenir l’application fiable, mais nous ne garantissons pas une disponibilité permanente,
-        une absence totale d’erreurs ou une compatibilité avec tous les appareils.
-      </p>
+        <div class="notice">
+          Factura ne remplace pas les conseils d’un expert-comptable, d’un avocat, d’un conseiller fiscal ou d’une administration compétente.
+        </div>
 
-      <h3>Limitation de responsabilité</h3>
-      <p>
-        Dans les limites permises par la loi, nous ne pouvons être tenus responsables des pertes de données, erreurs de saisie,
-        erreurs de facturation, pertes commerciales, obligations fiscales non respectées ou dommages indirects liés à l’utilisation de Factura.
-      </p>
+        <h3>Responsabilité de l’utilisateur</h3>
+        <p>
+          Vous êtes responsable du contenu saisi dans l’application, de l’exactitude de vos factures, de vos informations légales, fiscales, commerciales et comptables, ainsi que de l’utilisation des documents générés.
+        </p>
+
+        <h3>Conformité légale et fiscale</h3>
+        <p>
+          Les obligations de facturation peuvent varier selon votre pays, votre statut, votre activité, vos clients et la réglementation applicable. Il vous appartient de vérifier que vos factures respectent les règles applicables à votre situation.
+        </p>
+
+        <h3>PDF, exports et sauvegardes</h3>
+        <p>
+          Les PDF, exports CSV, JSON, ZIP ou autres fichiers générés par Factura sont fournis comme outils de gestion. Vous devez vérifier leur contenu avant envoi, archivage, déclaration, transmission ou utilisation officielle.
+        </p>
+
+        <h3>Version gratuite et version Pro</h3>
+        <p>
+          Certaines fonctionnalités peuvent être réservées à Factura Pro, comme les factures illimitées, les templates premium, l’export sans filigrane, les exports avancés, la sauvegarde/restauration ZIP ou la personnalisation PDF complète.
+        </p>
+
+        <h3>Disponibilité et évolution</h3>
+        <p>
+          Nous faisons notre possible pour maintenir l’application fiable et utile, mais nous ne garantissons pas une disponibilité permanente, une absence totale d’erreurs ou une compatibilité avec tous les appareils. Certaines fonctionnalités peuvent évoluer avec le temps.
+        </p>
+
+        <h3>Limitation de responsabilité</h3>
+        <p>
+          Dans les limites permises par la loi, nous ne pouvons être tenus responsables des pertes de données, erreurs de saisie, erreurs de facturation, pertes commerciales, obligations fiscales non respectées ou dommages indirects liés à l’utilisation de Factura.
+        </p>
+      </div>
+
+      <div data-lang="en">
+        <p>
+          By using Factura, you agree to these terms of use. Factura is a productivity tool designed to help create, organize, customize, export and share invoices.
+        </p>
+
+        <div class="notice">
+          Factura does not replace advice from an accountant, lawyer, tax advisor or competent authority.
+        </div>
+
+        <h3>User responsibility</h3>
+        <p>
+          You are responsible for the content entered in the app, the accuracy of your invoices, your legal, tax, commercial and accounting information, and the use of generated documents.
+        </p>
+
+        <h3>Legal and tax compliance</h3>
+        <p>
+          Invoicing obligations may vary depending on your country, status, business activity, clients and applicable regulations. You are responsible for ensuring that your invoices comply with the rules applicable to your situation.
+        </p>
+
+        <h3>PDF files, exports and backups</h3>
+        <p>
+          PDF files, CSV, JSON, ZIP exports and other files generated by Factura are provided as management tools. You should verify their content before sending, archiving, declaring, transmitting or using them officially.
+        </p>
+
+        <h3>Free version and Pro version</h3>
+        <p>
+          Some features may be reserved for Factura Pro, such as unlimited invoices, premium templates, watermark-free export, advanced exports, ZIP backup/restore or full PDF customization.
+        </p>
+
+        <h3>Availability and changes</h3>
+        <p>
+          We do our best to keep the app reliable and useful, but we do not guarantee permanent availability, complete absence of errors or compatibility with every device. Some features may evolve over time.
+        </p>
+
+        <h3>Limitation of liability</h3>
+        <p>
+          To the extent permitted by law, we cannot be held liable for data loss, input errors, invoicing errors, business losses, unmet tax obligations or indirect damages related to the use of Factura.
+        </p>
+      </div>
     </section>
 
     <section id="support">
+      <div class="section-kicker">Support</div>
       <h2>Support</h2>
-      <p>
-        Pour obtenir de l’aide, signaler un problème ou poser une question concernant Factura, contactez-nous :
-      </p>
 
-      <div class="grid">
-        <div class="mini-card">
-          <strong>Email support</strong>
-          <a href="mailto:support@elmariniapp.com">support@elmariniapp.com</a>
+      <div data-lang="fr">
+        <p>
+          Pour obtenir de l’aide, signaler un problème ou poser une question concernant Factura, contactez-nous par email.
+        </p>
+
+        <div class="cards-grid">
+          <div class="mini-card">
+            <div class="icon">✉️</div>
+            <strong>Email support</strong>
+            <span><a href="mailto:support@elmariniapp.com">support@elmariniapp.com</a></span>
+          </div>
+          <div class="mini-card">
+            <div class="icon">📱</div>
+            <strong>Application</strong>
+            <span>Factura — Invoice Generator</span>
+          </div>
+          <div class="mini-card">
+            <div class="icon">🧾</div>
+            <strong>Objet</strong>
+            <span>Facturation, PDF, clients, exports, sauvegarde et version Pro.</span>
+          </div>
         </div>
-        <div class="mini-card">
-          <strong>Application</strong>
-          Factura — Invoice Generator
-        </div>
+
+        <h3>Informations utiles à fournir</h3>
+        <ul>
+          <li>Votre appareil et version Android/iOS.</li>
+          <li>La version de Factura.</li>
+          <li>Une description claire du problème.</li>
+          <li>Les étapes pour reproduire le problème si possible.</li>
+          <li>Une capture d’écran si elle aide à comprendre le problème.</li>
+        </ul>
       </div>
 
-      <h3>Informations utiles à fournir</h3>
-      <ul>
-        <li>Votre appareil et version Android/iOS.</li>
-        <li>La version de Factura.</li>
-        <li>Une description claire du problème.</li>
-        <li>Les étapes pour reproduire le problème si possible.</li>
-      </ul>
+      <div data-lang="en">
+        <p>
+          To get help, report an issue or ask a question about Factura, contact us by email.
+        </p>
+
+        <div class="cards-grid">
+          <div class="mini-card">
+            <div class="icon">✉️</div>
+            <strong>Support email</strong>
+            <span><a href="mailto:support@elmariniapp.com">support@elmariniapp.com</a></span>
+          </div>
+          <div class="mini-card">
+            <div class="icon">📱</div>
+            <strong>Application</strong>
+            <span>Factura — Invoice Generator</span>
+          </div>
+          <div class="mini-card">
+            <div class="icon">🧾</div>
+            <strong>Scope</strong>
+            <span>Invoices, PDF files, clients, exports, backups and Pro version.</span>
+          </div>
+        </div>
+
+        <h3>Helpful information to provide</h3>
+        <ul>
+          <li>Your device and Android/iOS version.</li>
+          <li>Your Factura app version.</li>
+          <li>A clear description of the issue.</li>
+          <li>Steps to reproduce the issue if possible.</li>
+          <li>A screenshot if it helps explain the issue.</li>
+        </ul>
+      </div>
     </section>
 
     <section id="licenses">
-      <h2>Licences open-source</h2>
-      <p>
-        Factura peut utiliser des bibliothèques open-source Flutter/Dart ou des composants tiers.
-        Les licences applicables restent celles de leurs auteurs respectifs.
-      </p>
+      <div class="section-kicker">
+        <span data-lang="fr">Licences</span>
+        <span data-lang="en">Licenses</span>
+      </div>
 
-      <p>
-        Une liste plus détaillée des dépendances et licences peut être fournie dans l’application ou mise à jour sur cette page.
-      </p>
+      <h2 data-lang="fr">Licences open-source</h2>
+      <h2 data-lang="en">Open-source licenses</h2>
 
-      <div class="notice">
-        Si vous pensez qu’une attribution open-source manque ou doit être corrigée, contactez-nous à
-        <a href="mailto:support@elmariniapp.com">support@elmariniapp.com</a>.
+      <div data-lang="fr">
+        <p>
+          Factura peut utiliser des bibliothèques open-source Flutter/Dart ou des composants tiers. Les licences applicables restent celles de leurs auteurs respectifs.
+        </p>
+
+        <div class="legal-list">
+          <div class="legal-item">
+            <div class="check">✓</div>
+            <div>
+              <strong>Respect des auteurs</strong>
+              <p class="muted">Les composants tiers restent soumis à leurs licences respectives.</p>
+            </div>
+          </div>
+          <div class="legal-item">
+            <div class="check">✓</div>
+            <div>
+              <strong>Mise à jour possible</strong>
+              <p class="muted">Cette page peut être mise à jour pour ajouter ou corriger des attributions.</p>
+            </div>
+          </div>
+        </div>
+
+        <p>
+          Si vous pensez qu’une attribution open-source manque ou doit être corrigée, contactez-nous à
+          <a href="mailto:support@elmariniapp.com">support@elmariniapp.com</a>.
+        </p>
+      </div>
+
+      <div data-lang="en">
+        <p>
+          Factura may use open-source Flutter/Dart libraries or third-party components. Applicable licenses remain those of their respective authors.
+        </p>
+
+        <div class="legal-list">
+          <div class="legal-item">
+            <div class="check">✓</div>
+            <div>
+              <strong>Author respect</strong>
+              <p class="muted">Third-party components remain subject to their respective licenses.</p>
+            </div>
+          </div>
+          <div class="legal-item">
+            <div class="check">✓</div>
+            <div>
+              <strong>Possible updates</strong>
+              <p class="muted">This page may be updated to add or correct attributions.</p>
+            </div>
+          </div>
+        </div>
+
+        <p>
+          If you believe an open-source attribution is missing or should be corrected, contact us at
+          <a href="mailto:support@elmariniapp.com">support@elmariniapp.com</a>.
+        </p>
       </div>
     </section>
 
     <section id="contact">
+      <div class="section-kicker">Contact</div>
       <h2>Contact</h2>
-      <p>
-        Pour toute demande concernant Factura :
-      </p>
-      <p>
-        <a href="mailto:support@elmariniapp.com">support@elmariniapp.com</a>
-      </p>
-    </section>
 
-    <section id="english">
-      <h2>English Summary</h2>
-      <p class="muted">Last updated: 2026</p>
-
-      <h3>Privacy Policy</h3>
-      <p>
-        Factura is designed as a local-first invoice app. It does not require a user account and does not sell personal data.
-        Invoices, clients, company profile, preferences, generated PDF files and backups are stored locally on your device.
+      <p data-lang="fr">
+        Pour toute demande concernant Factura, la confidentialité, les conditions d’utilisation, le support ou les licences :
+      </p>
+      <p data-lang="en">
+        For any request regarding Factura, privacy, terms of use, support or licenses:
       </p>
 
       <p>
-        Factura does not include advertising tracking. If Pro purchases are offered, payments are handled by official platforms
-        such as Google Play or the App Store, according to their own payment and privacy policies.
-      </p>
-
-      <h3>Terms of Use</h3>
-      <p>
-        Factura helps users create, customize, export and share invoices. You remain responsible for the accuracy, legality,
-        accounting and tax compliance of the invoices and information you create with the app.
-      </p>
-
-      <p>
-        Factura is a productivity tool and does not replace professional legal, tax or accounting advice.
-      </p>
-
-      <h3>Support</h3>
-      <p>
-        For support, contact:
         <a href="mailto:support@elmariniapp.com">support@elmariniapp.com</a>
       </p>
     </section>
   </main>
 
   <footer>
-    © 2026 Factura. All rights reserved.
+    <span data-lang="fr">© 2026 Factura. Tous droits réservés.</span>
+    <span data-lang="en">© 2026 Factura. All rights reserved.</span>
   </footer>
+
+  <script>
+    function setLang(lang) {
+      document.body.classList.remove("lang-fr", "lang-en");
+      document.body.classList.add(lang === "en" ? "lang-en" : "lang-fr");
+
+      document.documentElement.lang = lang === "en" ? "en" : "fr";
+
+      document.getElementById("btn-fr").classList.toggle("active", lang === "fr");
+      document.getElementById("btn-en").classList.toggle("active", lang === "en");
+
+      try {
+        localStorage.setItem("facturaLegalLang", lang);
+      } catch (e) {}
+    }
+
+    (function initLang() {
+      try {
+        var saved = localStorage.getItem("facturaLegalLang");
+        if (saved === "en" || saved === "fr") {
+          setLang(saved);
+          return;
+        }
+      } catch (e) {}
+
+      var browser = (navigator.language || "").toLowerCase();
+      setLang(browser.indexOf("fr") === 0 ? "fr" : "en");
+    })();
+  </script>
 </body>
 </html>
