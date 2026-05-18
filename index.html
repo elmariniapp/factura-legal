@@ -1,0 +1,401 @@
+﻿<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Factura — Legal Center</title>
+  <meta name="description" content="Factura Legal Center: privacy policy, terms of use, support and open-source licenses.">
+  <style>
+    :root {
+      --bg: #f6f7fb;
+      --card: rgba(255,255,255,.86);
+      --text: #111827;
+      --muted: #5f6675;
+      --line: rgba(17,24,39,.10);
+      --blue: #2563eb;
+      --blue2: #3b82f6;
+      --shadow: 0 24px 80px rgba(15, 23, 42, .10);
+      --radius: 28px;
+    }
+
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at top left, rgba(59,130,246,.16), transparent 34%),
+        radial-gradient(circle at top right, rgba(147,197,253,.22), transparent 30%),
+        var(--bg);
+      line-height: 1.65;
+    }
+
+    header {
+      padding: 72px 22px 36px;
+      text-align: center;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 14px;
+      border-radius: 999px;
+      color: var(--blue);
+      background: rgba(37,99,235,.09);
+      font-weight: 700;
+      font-size: 13px;
+      letter-spacing: .02em;
+    }
+
+    h1 {
+      margin: 18px auto 10px;
+      max-width: 900px;
+      font-size: clamp(36px, 7vw, 72px);
+      line-height: 1.02;
+      letter-spacing: -.055em;
+    }
+
+    .hero-text {
+      max-width: 760px;
+      margin: 0 auto;
+      color: var(--muted);
+      font-size: 18px;
+    }
+
+    nav {
+      max-width: 980px;
+      margin: 28px auto 0;
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 10px;
+      padding: 0 20px;
+    }
+
+    nav a {
+      color: var(--text);
+      text-decoration: none;
+      padding: 10px 14px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: rgba(255,255,255,.72);
+      font-weight: 650;
+      font-size: 14px;
+    }
+
+    nav a:hover {
+      border-color: rgba(37,99,235,.35);
+      color: var(--blue);
+    }
+
+    main {
+      width: min(1040px, calc(100% - 28px));
+      margin: 0 auto 60px;
+    }
+
+    section {
+      margin: 22px 0;
+      padding: clamp(22px, 4vw, 44px);
+      border-radius: var(--radius);
+      background: var(--card);
+      border: 1px solid rgba(255,255,255,.68);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(18px);
+    }
+
+    h2 {
+      margin: 0 0 14px;
+      font-size: clamp(26px, 4vw, 38px);
+      line-height: 1.1;
+      letter-spacing: -.035em;
+    }
+
+    h3 {
+      margin: 28px 0 8px;
+      font-size: 20px;
+      letter-spacing: -.02em;
+    }
+
+    p { margin: 10px 0; }
+
+    ul { padding-left: 20px; }
+
+    li { margin: 7px 0; }
+
+    .muted { color: var(--muted); }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+      margin-top: 18px;
+    }
+
+    .mini-card {
+      padding: 18px;
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      background: rgba(255,255,255,.70);
+    }
+
+    .mini-card strong {
+      display: block;
+      margin-bottom: 4px;
+    }
+
+    a {
+      color: var(--blue);
+      font-weight: 650;
+    }
+
+    .notice {
+      border-left: 4px solid var(--blue);
+      padding: 14px 16px;
+      background: rgba(37,99,235,.08);
+      border-radius: 16px;
+      margin: 18px 0;
+    }
+
+    footer {
+      text-align: center;
+      color: var(--muted);
+      padding: 20px 20px 52px;
+      font-size: 14px;
+    }
+
+    @media (max-width: 720px) {
+      header { padding-top: 46px; }
+      .grid { grid-template-columns: 1fr; }
+      section { border-radius: 22px; }
+      nav { justify-content: flex-start; overflow-x: auto; flex-wrap: nowrap; padding-bottom: 4px; }
+      nav a { white-space: nowrap; }
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <div class="badge">Factura · Legal Center</div>
+    <h1>Legal, Privacy & Support</h1>
+    <p class="hero-text">
+      Informations légales, confidentialité, conditions d’utilisation, support et licences open-source pour l’application Factura.
+    </p>
+
+    <nav>
+      <a href="#privacy">Confidentialité</a>
+      <a href="#terms">Conditions</a>
+      <a href="#support">Support</a>
+      <a href="#licenses">Licences</a>
+      <a href="#contact">Contact</a>
+      <a href="#english">English</a>
+    </nav>
+  </header>
+
+  <main>
+    <section id="privacy">
+      <h2>Politique de confidentialité</h2>
+      <p class="muted">Dernière mise à jour : 2026</p>
+
+      <p>
+        Factura est une application de création et de gestion de factures conçue pour fonctionner simplement et localement.
+        Cette politique explique comment vos données sont traitées lorsque vous utilisez l’application.
+      </p>
+
+      <h3>Données personnelles</h3>
+      <p>
+        Factura ne nécessite pas de compte utilisateur. L’application ne demande pas d’inscription, ne propose pas de réseau social
+        et ne vend pas vos données personnelles.
+      </p>
+
+      <h3>Données stockées localement</h3>
+      <p>
+        Les informations que vous ajoutez dans Factura, comme les factures, clients, profil entreprise, logo, signature,
+        cachet, préférences et fichiers générés, sont stockées localement sur votre appareil.
+      </p>
+
+      <h3>Documents et factures</h3>
+      <p>
+        Les factures, PDF, sauvegardes ZIP et exports générés par l’application restent sous votre contrôle.
+        Lorsque vous partagez ou exportez un document, l’action est effectuée via les mécanismes de partage ou de stockage de votre appareil.
+      </p>
+
+      <h3>Publicité et suivi</h3>
+      <p>
+        Factura n’intègre pas de publicité et n’utilise pas de suivi publicitaire.
+      </p>
+
+      <h3>Achats intégrés</h3>
+      <p>
+        Factura peut proposer une version Pro. Les achats, lorsqu’ils sont disponibles, sont gérés par les plateformes officielles
+        comme Google Play ou l’App Store. Ces plateformes peuvent traiter certaines données nécessaires au paiement, selon leurs propres politiques.
+      </p>
+
+      <h3>Cloud et sauvegarde</h3>
+      <p>
+        Factura ne synchronise pas automatiquement vos données vers un cloud propriétaire. Si vous utilisez une sauvegarde ZIP ou un export,
+        vous êtes responsable du lieu où vous stockez ou partagez ce fichier.
+      </p>
+
+      <h3>Suppression des données</h3>
+      <p>
+        Vous pouvez supprimer vos données directement depuis l’application lorsque les options correspondantes existent.
+        La désinstallation de l’application peut supprimer les données locales selon le comportement du système d’exploitation.
+      </p>
+
+      <h3>Contact confidentialité</h3>
+      <p>
+        Pour toute question liée à la confidentialité, vous pouvez nous contacter à :
+        <a href="mailto:support@elmariniapp.com">support@elmariniapp.com</a>
+      </p>
+    </section>
+
+    <section id="terms">
+      <h2>Conditions d’utilisation</h2>
+      <p class="muted">Dernière mise à jour : 2026</p>
+
+      <p>
+        En utilisant Factura, vous acceptez les présentes conditions d’utilisation.
+      </p>
+
+      <h3>Objet de l’application</h3>
+      <p>
+        Factura permet de créer, organiser, personnaliser, exporter et partager des factures et documents associés.
+      </p>
+
+      <h3>Responsabilité de l’utilisateur</h3>
+      <p>
+        Vous êtes responsable du contenu saisi dans l’application, de l’exactitude de vos factures, de vos informations légales,
+        fiscales, commerciales et comptables, ainsi que de l’utilisation des documents générés.
+      </p>
+
+      <div class="notice">
+        Factura est un outil de productivité. L’application ne remplace pas les conseils d’un expert-comptable, d’un avocat,
+        d’un conseiller fiscal ou d’une administration compétente.
+      </div>
+
+      <h3>Conformité légale et fiscale</h3>
+      <p>
+        Les obligations de facturation peuvent varier selon votre pays, votre statut, votre activité et vos clients.
+        Il vous appartient de vérifier que vos factures respectent les règles applicables à votre situation.
+      </p>
+
+      <h3>PDF et exports</h3>
+      <p>
+        Les PDF, exports CSV, JSON, ZIP ou autres fichiers générés par Factura sont fournis comme outils de gestion.
+        Vous devez vérifier leur contenu avant envoi, archivage ou utilisation officielle.
+      </p>
+
+      <h3>Version Pro</h3>
+      <p>
+        Certaines fonctionnalités peuvent être réservées à Factura Pro, comme les factures illimitées, templates premium,
+        exports avancés, sauvegarde/restauration ZIP ou suppression du filigrane.
+      </p>
+
+      <h3>Disponibilité</h3>
+      <p>
+        Nous faisons notre possible pour maintenir l’application fiable, mais nous ne garantissons pas une disponibilité permanente,
+        une absence totale d’erreurs ou une compatibilité avec tous les appareils.
+      </p>
+
+      <h3>Limitation de responsabilité</h3>
+      <p>
+        Dans les limites permises par la loi, nous ne pouvons être tenus responsables des pertes de données, erreurs de saisie,
+        erreurs de facturation, pertes commerciales, obligations fiscales non respectées ou dommages indirects liés à l’utilisation de Factura.
+      </p>
+    </section>
+
+    <section id="support">
+      <h2>Support</h2>
+      <p>
+        Pour obtenir de l’aide, signaler un problème ou poser une question concernant Factura, contactez-nous :
+      </p>
+
+      <div class="grid">
+        <div class="mini-card">
+          <strong>Email support</strong>
+          <a href="mailto:support@elmariniapp.com">support@elmariniapp.com</a>
+        </div>
+        <div class="mini-card">
+          <strong>Application</strong>
+          Factura — Invoice Generator
+        </div>
+      </div>
+
+      <h3>Informations utiles à fournir</h3>
+      <ul>
+        <li>Votre appareil et version Android/iOS.</li>
+        <li>La version de Factura.</li>
+        <li>Une description claire du problème.</li>
+        <li>Les étapes pour reproduire le problème si possible.</li>
+      </ul>
+    </section>
+
+    <section id="licenses">
+      <h2>Licences open-source</h2>
+      <p>
+        Factura peut utiliser des bibliothèques open-source Flutter/Dart ou des composants tiers.
+        Les licences applicables restent celles de leurs auteurs respectifs.
+      </p>
+
+      <p>
+        Une liste plus détaillée des dépendances et licences peut être fournie dans l’application ou mise à jour sur cette page.
+      </p>
+
+      <div class="notice">
+        Si vous pensez qu’une attribution open-source manque ou doit être corrigée, contactez-nous à
+        <a href="mailto:support@elmariniapp.com">support@elmariniapp.com</a>.
+      </div>
+    </section>
+
+    <section id="contact">
+      <h2>Contact</h2>
+      <p>
+        Pour toute demande concernant Factura :
+      </p>
+      <p>
+        <a href="mailto:support@elmariniapp.com">support@elmariniapp.com</a>
+      </p>
+    </section>
+
+    <section id="english">
+      <h2>English Summary</h2>
+      <p class="muted">Last updated: 2026</p>
+
+      <h3>Privacy Policy</h3>
+      <p>
+        Factura is designed as a local-first invoice app. It does not require a user account and does not sell personal data.
+        Invoices, clients, company profile, preferences, generated PDF files and backups are stored locally on your device.
+      </p>
+
+      <p>
+        Factura does not include advertising tracking. If Pro purchases are offered, payments are handled by official platforms
+        such as Google Play or the App Store, according to their own payment and privacy policies.
+      </p>
+
+      <h3>Terms of Use</h3>
+      <p>
+        Factura helps users create, customize, export and share invoices. You remain responsible for the accuracy, legality,
+        accounting and tax compliance of the invoices and information you create with the app.
+      </p>
+
+      <p>
+        Factura is a productivity tool and does not replace professional legal, tax or accounting advice.
+      </p>
+
+      <h3>Support</h3>
+      <p>
+        For support, contact:
+        <a href="mailto:support@elmariniapp.com">support@elmariniapp.com</a>
+      </p>
+    </section>
+  </main>
+
+  <footer>
+    © 2026 Factura. All rights reserved.
+  </footer>
+</body>
+</html>
